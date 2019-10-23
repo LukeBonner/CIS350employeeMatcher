@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ *
+ */
 public class employeeMatcherPanel extends JPanel {
     private JButton acceptButton;
     private JButton declineButton;
@@ -15,6 +18,9 @@ public class employeeMatcherPanel extends JPanel {
     private JLabel emptyArea;
 
 
+    /**
+     *
+     */
     public employeeMatcherPanel(){
         JPanel displayArea = new JPanel();
         JPanel buttonArea = new JPanel();
@@ -30,6 +36,7 @@ public class employeeMatcherPanel extends JPanel {
         this.slideLastImage = new JButton("<--");
         this.slideNextImage = new JButton("-->");
         this.emptyArea = new JLabel();
+        displayArea.setPreferredSize(new Dimension(200,200));
         buttonArea.setLayout(new GridLayout(2,3));
         displayArea.setLayout(new GridLayout(1,1));
 
