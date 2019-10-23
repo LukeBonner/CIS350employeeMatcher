@@ -21,6 +21,9 @@ public class employeeMatcherPanel extends JPanel {
 
 
 
+        buttonListener theListener = new buttonListener();
+
+
         this.acceptButton = new JButton("interested");
         this.declineButton = new JButton("not interested");
         this.extremeInterestButton = new JButton("very interested");
@@ -37,6 +40,14 @@ public class employeeMatcherPanel extends JPanel {
         buttonArea.add(declineButton);
         buttonArea.add(extremeInterestButton);
         buttonArea.add(acceptButton);
+
+
+        slideNextImage.addActionListener(theListener);
+        declineButton.addActionListener(theListener);
+        extremeInterestButton.addActionListener(theListener);
+        acceptButton.addActionListener(theListener);
+        slideLastImage.addActionListener(theListener);
+
 
 
 

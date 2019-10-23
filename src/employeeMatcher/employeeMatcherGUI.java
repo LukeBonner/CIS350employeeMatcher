@@ -18,7 +18,7 @@ public class employeeMatcherGUI extends JFrame {
 
 
     public static void main(String[] args){
-
+        new employeeMatcherGUI("Employment Matcher!");
     }
 
 }
