@@ -18,7 +18,9 @@ public class employeeMatcherGUI extends JFrame {
 
 
     public static void main(String[] args){
-        new employeeMatcherGUI("Employment Matcher!");
+        DataReader db = new DataReader();
+        employeeMatcherGUI test = new employeeMatcherGUI("Test Title");
+        db.saveStorage();
     }
 
 }
