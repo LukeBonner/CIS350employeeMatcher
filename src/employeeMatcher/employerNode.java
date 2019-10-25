@@ -1,45 +1,26 @@
+// method extracts only the data relevant to the user's profile
+// to be stored in a node held in a LinkedList
+
 package employeeMatcher;
 
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 import java.util.ArrayList;
 
-public class matcherEmployer extends employeeMatcherUser {
-    public String companyName;
+public class employerNode {
+    private String companyName;
+    private String location;
+    private String size;
+    private String industry;
+    private String position;
+    private String jobDescription;
+    private String companyDescription;
+    private ArrayList<BufferedImage> images;
+    private employerNode next;
 
-    public String location;
-
-    public String size;
-
-    public String industry;
-
-    public String position;
-
-    public String jobDescription;
-
-    public String companyDescription;
-
-    public ArrayList<BufferedImage> images;
-
-    // add ArrayList containing every seeker, and a boolean
-    // indicating whether user liked (True) or disliked (False) them
-    // determines whether users can message each other
-
-    public matcherEmployer(){
-        companyName = "";
-        location = "";
-        size = "";
-        industry = "";
-        position = "";
-        jobDescription = "";
-        companyDescription = "";
-        images = new ArrayList<BufferedImage>();
-    }
-
-    public matcherEmployer(String companyName, String location,
-                           String size, String industry, String position,
-                           String jobDescription, String companyDescription,
-                           ArrayList<BufferedImage> images) {
+    public employerNode(String companyName, String location,
+                        String size, String industry, String position,
+                        String jobDescription, String companyDescription,
+                        ArrayList<BufferedImage> images, employerNode next) {
         this.companyName = companyName;
         this.location = location;
         this.size = size;
@@ -48,6 +29,11 @@ public class matcherEmployer extends employeeMatcherUser {
         this.jobDescription = jobDescription;
         this.companyDescription = companyDescription;
         this.images = images;
+        this.next = next;
+    }
+
+    public employerNode(){
+
     }
 
     public String getCompanyName() {
@@ -114,11 +100,19 @@ public class matcherEmployer extends employeeMatcherUser {
         this.images = images;
     }
 
-    public void createProfile(){
-        // initial creation of the node
+    public void setNext(employerNode next){
+        this.next = next;
     }
 
-    public void updateProfile(){
-
+    public employerNode getNext(){
+        return next;
     }
+
+    public employerNode updateNode(){
+        // updates the user's profile by changing the current state
+        // of their profile in the list
+        return null;
+    }
+
+
 }

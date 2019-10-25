@@ -1,44 +1,28 @@
+// method extracts only the data relevant to the user's profile
+// to be stored in a node held in a LinkedList
+
 package employeeMatcher;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class matcherSeeker extends employeeMatcherUser {
+public class seekerNode {
     public String firstName;
-
     public String industry;
-
     public String lastName;
-
     public String personalStatement;
-
     public ArrayList<String> education;
-
     public ArrayList<String> experience;
-
     public ArrayList<BufferedImage> images;
-
     public ArrayList<String> urls;
+    public seekerNode next;
 
-    // add ArrayList containing every seeker, and a boolean
-    // indicating whether user liked (True) or disliked (False) them
-    // determines whether users can message each other
+    public seekerNode(String firstName, String industry, String lastName,
+                      String personalStatement, ArrayList<String> education,
+                      ArrayList<String> experience,
+                      ArrayList<BufferedImage> images, ArrayList<String> urls,
+                      seekerNode next) {
 
-    public matcherSeeker(){
-        firstName = "";
-        industry = "";
-        lastName = "";
-        personalStatement = "";
-        education = new ArrayList<String>();
-        experience = new ArrayList<String>();
-        images = new ArrayList<BufferedImage>();
-        urls = new ArrayList<String>();
-    }
-
-    public matcherSeeker(String firstName, String industry, String lastName,
-                         String personalStatement, ArrayList<String> education,
-                         ArrayList<String> experience,
-                         ArrayList<BufferedImage> images, ArrayList<String> urls) {
         this.firstName = firstName;
         this.industry = industry;
         this.lastName = lastName;
@@ -47,6 +31,7 @@ public class matcherSeeker extends employeeMatcherUser {
         this.experience = experience;
         this.images = images;
         this.urls = urls;
+        this.next = next;
     }
 
     public String getFirstName() {
@@ -113,5 +98,17 @@ public class matcherSeeker extends employeeMatcherUser {
         this.urls = urls;
     }
 
+    public seekerNode getNext() {
+        return next;
+    }
 
+    public void setNext(seekerNode next) {
+        this.next = next;
+    }
+
+    public employerNode updateNode(){
+        // updates the user's profile by changing the current state
+        // of their profile in the list
+        return null;
+    }
 }
