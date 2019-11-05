@@ -7,6 +7,7 @@ public class EmployeeMatcherUser {
   private String pword;
   private ArrayList<String> desired;
   private String email;
+  protected int type;
 
   public EmployeeMatcherUser() {
     uname = "";
