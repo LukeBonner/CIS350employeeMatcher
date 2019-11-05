@@ -4,21 +4,21 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class MatcherSeeker extends EmployeeMatcherUser {
-  public String firstName;
+  private String firstName;
 
-  public String industry;
+  private String industry;
 
-  public String lastName;
+  private String lastName;
 
-  public String personalStatement;
+  private String personalStatement;
 
-  public ArrayList<String> education;
+  private ArrayList<String> education;
 
-  public ArrayList<String> experience;
+  private ArrayList<String> experience;
 
-  public ArrayList<BufferedImage> images;
+  private ArrayList<BufferedImage> images;
 
-  public ArrayList<String> urls;
+  private ArrayList<String> urls;
 
   // add ArrayList containing every seeker, and a boolean
   // indicating whether user liked (True) or disliked (False) them
@@ -33,12 +33,13 @@ public class MatcherSeeker extends EmployeeMatcherUser {
     experience = new ArrayList<String>();
     images = new ArrayList<BufferedImage>();
     urls = new ArrayList<String>();
+    type = 0;
   }
 
   public MatcherSeeker(String firstName, String industry, String lastName,
-             String personalStatement, ArrayList<String> education,
-             ArrayList<String> experience,
-             ArrayList<BufferedImage> images, ArrayList<String> urls) {
+                       String personalStatement, ArrayList<String> education,
+                       ArrayList<String> experience,
+                       ArrayList<BufferedImage> images, ArrayList<String> urls) {
     this.firstName = firstName;
     this.industry = industry;
     this.lastName = lastName;
@@ -97,12 +98,13 @@ public class MatcherSeeker extends EmployeeMatcherUser {
     this.experience = experience;
   }
 
+  // returns arraylist of seeker's images
   public ArrayList<BufferedImage> getImages() {
     return images;
   }
 
-  public void setImages(ArrayList<BufferedImage> images) {
-    this.images = images;
+  public void addImage(BufferedImage image) {
+    images.add(image);
   }
 
   public ArrayList<String> getUrls() {

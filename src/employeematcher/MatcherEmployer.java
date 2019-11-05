@@ -4,21 +4,21 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class MatcherEmployer extends EmployeeMatcherUser {
-  public String companyName;
+  private String companyName;
 
-  public String location;
+  private String location;
 
-  public String size;
+  private String size;
 
-  public String industry;
+  private String industry;
 
-  public String position;
+  private String position;
 
-  public String jobDescription;
+  private String jobDescription;
 
-  public String companyDescription;
+  private String companyDescription;
 
-  public ArrayList<BufferedImage> images;
+  private ArrayList<BufferedImage> images;
 
   // add ArrayList containing every seeker, and a boolean
   // indicating whether user liked (True) or disliked (False) them
@@ -33,12 +33,13 @@ public class MatcherEmployer extends EmployeeMatcherUser {
     jobDescription = "";
     companyDescription = "";
     images = new ArrayList<BufferedImage>();
+    type = 1;
   }
 
   public MatcherEmployer(String companyName, String location,
-               String size, String industry, String position,
-               String jobDescription, String companyDescription,
-               ArrayList<BufferedImage> images) {
+                         String size, String industry, String position,
+                         String jobDescription, String companyDescription,
+                         ArrayList<BufferedImage> images) {
     this.companyName = companyName;
     this.location = location;
     this.size = size;
@@ -105,12 +106,13 @@ public class MatcherEmployer extends EmployeeMatcherUser {
     this.companyDescription = companyDescription;
   }
 
+  // returns arraylist of employer's images
   public ArrayList<BufferedImage> getImages() {
     return images;
   }
 
-  public void setImages(ArrayList<BufferedImage> images) {
-    this.images = images;
+  public void addImage(BufferedImage image) {
+    images.add(image);
   }
 
   public void createProfile(){
