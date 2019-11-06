@@ -10,6 +10,6 @@ in and focused most of their attention on.
 
 the roles are as follows:
 Sim was the main handler of Documentation and organization of the project.
-Zack was the main programmer and researcher of the matching software.
-Adam was the main programmer and researcher of the account database software.
+Zack was the programmer and researcher of the matching software.
+Adam was the programmer and researcher of the account database software.
 Luke was the programmer and designer of the GUI and app display.
