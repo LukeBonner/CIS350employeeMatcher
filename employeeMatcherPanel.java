@@ -69,14 +69,19 @@ public class employeeMatcherPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==slideLastImage){
+                //to be placed: ability to slide to last account image
 
             }else if(e.getSource() == slideNextImage){
+                //to be placed: ability to slide to next account image
 
             }else if(e.getSource()== declineButton){
+                //to be placed: decline user and move on to next
 
             }else if(e.getSource()==extremeInterestButton){
+                //to be placed: show heightened interest and allow other user to know
 
             }else if(e.getSource()==acceptButton){
+                //to be placed: show interest and move onto next user
 
             }
         }

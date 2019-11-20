@@ -3,6 +3,10 @@ package employeematcher;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -14,7 +18,11 @@ public class EmployeeMatcherPanel extends JPanel {
   private JButton extremeInterestButton;
   private JButton slideNextImage;
   private JButton slideLastImage;
+  private JLabel displayAccountImages;
   private JLabel emptyArea;
+  private String[] fileLocations = {"/Images/commitHistory.png","resumeTemplate.png","letterExample.png"};
+  private ImageIcon[] accountImages = new ImageIcon[fileLocations.length];
+  private int imageTracker = 0;
 
 
   /**
@@ -35,6 +43,8 @@ public class EmployeeMatcherPanel extends JPanel {
     this.slideLastImage = new JButton("<--");
     this.slideNextImage = new JButton("-->");
     this.emptyArea = new JLabel();
+    this.displayAccountImages = new JLabel();
+
     displayArea.setPreferredSize(new Dimension(200,200));
     buttonArea.setLayout(new GridLayout(2,3));
     displayArea.setLayout(new GridLayout(1,1));
@@ -48,11 +58,14 @@ public class EmployeeMatcherPanel extends JPanel {
     buttonArea.add(acceptButton);
 
 
-    slideNextImage.addActionListener(theListener);
-    declineButton.addActionListener(theListener);
-    extremeInterestButton.addActionListener(theListener);
-    acceptButton.addActionListener(theListener);
-    slideLastImage.addActionListener(theListener);
+
+    slideNextImage.addMouseListener(theListener);
+    declineButton.addMouseListener(theListener);
+    extremeInterestButton.addMouseListener(theListener);
+    acceptButton.addMouseListener(theListener);
+    slideLastImage.addMouseListener(theListener);
+
+    displayArea.add(displayAccountImages);
 
 
 
@@ -61,16 +74,59 @@ public class EmployeeMatcherPanel extends JPanel {
     this.add(displayArea, BorderLayout.CENTER);
     this.add(buttonArea, BorderLayout.SOUTH);
 
+    displaySetup();
+
   }
 
-  private class ButtonListener implements ActionListener {
+
+  public void displaySetup(){
+    URL url = null;
+
+
+    try{
+      for(int i =0;i<accountImages.length;i++){
+        accountImages[i] = new ImageIcon(ImageIO
+                .read(getClass()
+                .getResource(fileLocations[i]))
+                .getScaledInstance(200,100,Image.SCALE_SMOOTH));
+      }
+    }catch(Exception e){
+      System.out.println(e);
+    }
+
+    this.displayAccountImages.setIcon(accountImages[imageTracker]);
+
+  }
+
+  public void slideLast(MouseEvent e){
+    displayAccountImages.setIcon(accountImages[imageTracker-1]);
+  }
+
+
+  private class ButtonListener implements MouseListener {
+
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
       if (e.getSource() == slideLastImage) {
-        System.out.println("Clicked Previous Image");
+        if(imageTracker-1>0){
+          slideLast(e);
+        }
       } else if (e.getSource() == slideNextImage) {
-        System.out.println("Clicked Next Image");
+        if(!(imageTracker+1 > accountImages.length)) {
+          slideNext(e);
+        }
+
       } else if (e.getSource() == declineButton) {
         System.out.println("Clicked Decline");
       } else if (e.getSource() == extremeInterestButton) {
@@ -79,8 +135,21 @@ public class EmployeeMatcherPanel extends JPanel {
         System.out.println("Clicked Accept");
       }
     }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
   }
 
+  private void slideNext(MouseEvent e) {
+    displayAccountImages.setIcon(accountImages[imageTracker+1]);
+  }
 
 
 }
