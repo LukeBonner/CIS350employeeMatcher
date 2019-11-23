@@ -1,7 +1,8 @@
 package employeematcher;
 
-import java.awt.image.BufferedImage;
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
 
 public class MatcherEmployer extends EmployeeMatcherUser {
   private String companyName;
@@ -18,28 +19,44 @@ public class MatcherEmployer extends EmployeeMatcherUser {
 
   private String companyDescription;
 
-  private ArrayList<BufferedImage> images;
+  private ArrayList<ImageIcon> images;
+
+  private ArrayList<MatcherSeeker> matches;
 
   // add ArrayList containing every seeker, and a boolean
   // indicating whether user liked (True) or disliked (False) them
   // determines whether users can message each other
 
   public MatcherEmployer() {
-    companyName = "";
+    companyName = "EMPTY";
     location = "";
     size = "";
     industry = "";
     position = "";
     jobDescription = "";
     companyDescription = "";
-    images = new ArrayList<BufferedImage>();
+    images = new ArrayList<ImageIcon>();
     type = 1;
+    matches = new ArrayList<MatcherSeeker>();
+  }
+
+  public MatcherEmployer(String name){
+    companyName = name;
+    location = "";
+    size = "";
+    industry = "";
+    position = "";
+    jobDescription = "";
+    companyDescription = "";
+    images = new ArrayList<ImageIcon>();
+    type = 1;
+
   }
 
   public MatcherEmployer(String companyName, String location,
                          String size, String industry, String position,
                          String jobDescription, String companyDescription,
-                         ArrayList<BufferedImage> images) {
+                         ArrayList<ImageIcon> images) {
     this.companyName = companyName;
     this.location = location;
     this.size = size;
@@ -107,11 +124,11 @@ public class MatcherEmployer extends EmployeeMatcherUser {
   }
 
   // returns arraylist of employer's images
-  public ArrayList<BufferedImage> getImages() {
+  public ArrayList<ImageIcon> getImages() {
     return images;
   }
 
-  public void addImage(BufferedImage image) {
+  public void addImage(ImageIcon image) {
     images.add(image);
   }
 
@@ -122,4 +139,17 @@ public class MatcherEmployer extends EmployeeMatcherUser {
   public void updateProfile(){
 
   }
+
+//  public void addMatchE(MatcherSeeker s){
+//    matches.add(s);
+//  }
+
+  public String toString(){
+    return companyName;
+  }
+
+
+//  public ArrayList<MatcherSeeker> getUserMatches(){
+//    return matches;
+//  }
 }

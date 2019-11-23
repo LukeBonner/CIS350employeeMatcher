@@ -1,7 +1,9 @@
 package employeematcher;
 
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
 
 public class MatcherSeeker extends EmployeeMatcherUser {
   private String firstName;
@@ -16,30 +18,46 @@ public class MatcherSeeker extends EmployeeMatcherUser {
 
   private ArrayList<String> experience;
 
-  private ArrayList<BufferedImage> images;
+  private ArrayList<ImageIcon> images;
 
   private ArrayList<String> urls;
+
+  private ArrayList<MatcherEmployer> matches;
 
   // add ArrayList containing every seeker, and a boolean
   // indicating whether user liked (True) or disliked (False) them
   // determines whether users can message each other
 
   public MatcherSeeker() {
-    firstName = "";
+    firstName = "EMPTY";
     industry = "";
     lastName = "";
     personalStatement = "";
     education = new ArrayList<String>();
     experience = new ArrayList<String>();
-    images = new ArrayList<BufferedImage>();
+    images = new ArrayList<ImageIcon>();
     urls = new ArrayList<String>();
     type = 0;
+    matches = new ArrayList<MatcherEmployer>();
+  }
+
+  public MatcherSeeker(String name){
+    firstName = name;
+    industry = "";
+    lastName = "";
+    personalStatement = "";
+    education = new ArrayList<String>();
+    experience = new ArrayList<String>();
+    images = new ArrayList<ImageIcon>();
+    urls = new ArrayList<String>();
+    type = 0;
+
   }
 
   public MatcherSeeker(String firstName, String industry, String lastName,
                        String personalStatement, ArrayList<String> education,
                        ArrayList<String> experience,
-                       ArrayList<BufferedImage> images, ArrayList<String> urls) {
+                       ArrayList<ImageIcon> images, ArrayList<String> urls) {
     this.firstName = firstName;
     this.industry = industry;
     this.lastName = lastName;
@@ -99,11 +117,11 @@ public class MatcherSeeker extends EmployeeMatcherUser {
   }
 
   // returns arraylist of seeker's images
-  public ArrayList<BufferedImage> getImages() {
+  public ArrayList<ImageIcon> getImages() {
     return images;
   }
 
-  public void addImage(BufferedImage image) {
+  public void addImage(ImageIcon image) {
     images.add(image);
   }
 
@@ -113,6 +131,18 @@ public class MatcherSeeker extends EmployeeMatcherUser {
 
   public void setUrls(ArrayList<String> urls) {
     this.urls = urls;
+  }
+
+//  public void addMatchS(MatcherEmployer e){
+//    matches.add(e);
+//  }
+
+//  public ArrayList<MatcherEmployer> getUserMatches(){
+//    return matches;
+//  }
+
+  public String toString(){
+    return firstName;
   }
 
 

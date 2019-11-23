@@ -18,6 +18,14 @@ public class EmployeeMatcherPanel extends JPanel {
   private JButton extremeInterestButton;
   private JButton slideNextImage;
   private JButton slideLastImage;
+  private JLabel accountDetail1;
+  private JLabel accountDetail2;
+  private JLabel accountDetail3;
+  private JLabel
+  private JLabel
+  private JLabel
+  private JLabel
+
   private JLabel displayAccountImages;
   private JLabel emptyArea;
   private String[] fileLocations = {"/Images/commitHistory.png","resumeTemplate.png","letterExample.png"};
@@ -31,6 +39,7 @@ public class EmployeeMatcherPanel extends JPanel {
   public EmployeeMatcherPanel() {
     JPanel displayArea = new JPanel();
     JPanel buttonArea = new JPanel();
+    JPanel accountArea = new JPanel();
 
 
 
@@ -48,6 +57,7 @@ public class EmployeeMatcherPanel extends JPanel {
     displayArea.setPreferredSize(new Dimension(200,200));
     buttonArea.setLayout(new GridLayout(2,3));
     displayArea.setLayout(new GridLayout(1,1));
+    accountArea.setLayout(new GridLayout(4,2));
 
 
     buttonArea.add(slideLastImage);
@@ -71,7 +81,7 @@ public class EmployeeMatcherPanel extends JPanel {
 
 
 
-    this.add(displayArea, BorderLayout.CENTER);
+    this.add(displayArea, BorderLayout.NORTH);
     this.add(buttonArea, BorderLayout.SOUTH);
 
     displaySetup();
@@ -100,6 +110,7 @@ public class EmployeeMatcherPanel extends JPanel {
 
   public void slideLast(MouseEvent e){
     displayAccountImages.setIcon(accountImages[imageTracker-1]);
+    displaySetup();
   }
 
 
@@ -149,6 +160,7 @@ public class EmployeeMatcherPanel extends JPanel {
 
   private void slideNext(MouseEvent e) {
     displayAccountImages.setIcon(accountImages[imageTracker+1]);
+    displaySetup();
   }
 
 
