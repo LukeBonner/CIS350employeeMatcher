@@ -1,4 +1,4 @@
-package employeematcher;
+package employeeMatcher;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -32,6 +32,8 @@ public class EmployeeMatcherPanel extends JPanel {
   private ImageIcon[] accountImages = new ImageIcon[fileLocations.length];
   private int imageTracker = 0;
 
+  private EmployeeMatcherUser currentUser;
+
 
   /**
    *
@@ -40,6 +42,8 @@ public class EmployeeMatcherPanel extends JPanel {
     JPanel displayArea = new JPanel();
     JPanel buttonArea = new JPanel();
     JPanel accountArea = new JPanel();
+
+    this.currentUser = new EmployeeMatcherUser;
 
 
 
@@ -93,17 +97,18 @@ public class EmployeeMatcherPanel extends JPanel {
     URL url = null;
 
 
-    try{
-      for(int i =0;i<accountImages.length;i++){
-        accountImages[i] = new ImageIcon(ImageIO
-                .read(getClass()
-                .getResource(fileLocations[i]))
-                .getScaledInstance(200,100,Image.SCALE_SMOOTH));
-      }
-    }catch(Exception e){
-      System.out.println(e);
-    }
+//    try{
+//      for(int i =0;i<accountImages.length;i++){
+//        accountImages[i] = new ImageIcon(ImageIO
+//                .read(getClass()
+//                .getResource(fileLocations[i]))
+//                .getScaledInstance(200,100,Image.SCALE_SMOOTH));
+//      }
+//    }catch(Exception e){
+//      System.out.println(e);
+//    }
 
+    accountImages = currentUser.getImages;
     this.displayAccountImages.setIcon(accountImages[imageTracker]);
 
   }
@@ -140,10 +145,13 @@ public class EmployeeMatcherPanel extends JPanel {
 
       } else if (e.getSource() == declineButton) {
         System.out.println("Clicked Decline");
+        //currentUser.
       } else if (e.getSource() == extremeInterestButton) {
         System.out.println("Clicked Extreme Interest");
+        //currentUser.
       } else if (e.getSource() == acceptButton) {
         System.out.println("Clicked Accept");
+        //currentUser.
       }
     }
 

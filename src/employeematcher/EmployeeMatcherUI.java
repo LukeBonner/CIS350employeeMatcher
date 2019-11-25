@@ -1,4 +1,4 @@
-package employeematcher;
+package employeeMatcher;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
