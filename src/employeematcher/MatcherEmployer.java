@@ -1,4 +1,4 @@
-package employeematcher;
+package employeeMatcher;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -21,8 +21,6 @@ public class MatcherEmployer extends EmployeeMatcherUser {
 
   private ArrayList<ImageIcon> images;
 
-  private ArrayList<MatcherSeeker> matches;
-
   // add ArrayList containing every seeker, and a boolean
   // indicating whether user liked (True) or disliked (False) them
   // determines whether users can message each other
@@ -37,7 +35,6 @@ public class MatcherEmployer extends EmployeeMatcherUser {
     companyDescription = "";
     images = new ArrayList<ImageIcon>();
     type = 1;
-    matches = new ArrayList<MatcherSeeker>();
   }
 
   public MatcherEmployer(String name){
@@ -140,16 +137,8 @@ public class MatcherEmployer extends EmployeeMatcherUser {
 
   }
 
-//  public void addMatchE(MatcherSeeker s){
-//    matches.add(s);
-//  }
-
   public String toString(){
     return companyName;
   }
 
-
-//  public ArrayList<MatcherSeeker> getUserMatches(){
-//    return matches;
-//  }
 }

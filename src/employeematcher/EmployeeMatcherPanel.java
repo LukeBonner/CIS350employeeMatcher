@@ -21,10 +21,10 @@ public class EmployeeMatcherPanel extends JPanel {
   private JLabel accountDetail1;
   private JLabel accountDetail2;
   private JLabel accountDetail3;
-  private JLabel
-  private JLabel
-  private JLabel
-  private JLabel
+//  private JLabel
+//  private JLabel
+//  private JLabel
+//  private JLabel
 
   private JLabel displayAccountImages;
   private JLabel emptyArea;
@@ -43,7 +43,7 @@ public class EmployeeMatcherPanel extends JPanel {
     JPanel buttonArea = new JPanel();
     JPanel accountArea = new JPanel();
 
-    this.currentUser = new EmployeeMatcherUser;
+    this.currentUser = new EmployeeMatcherUser();
 
 
 
@@ -108,7 +108,7 @@ public class EmployeeMatcherPanel extends JPanel {
 //      System.out.println(e);
 //    }
 
-    accountImages = currentUser.getImages;
+    //accountImages = currentUser.getImages;
     this.displayAccountImages.setIcon(accountImages[imageTracker]);
 
   }
@@ -124,12 +124,12 @@ public class EmployeeMatcherPanel extends JPanel {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+      System.out.println("Click\n");
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+      System.out.println("Pressed");
     }
 
     @Override

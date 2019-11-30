@@ -7,6 +7,7 @@ public class EmployeeMatcherUser {
   private String pword;
   private ArrayList<String> desired;
   private String email;
+  private ArrayList<EmployeeMatcherUser> matches;
   protected int type;
 
   public EmployeeMatcherUser() {
@@ -14,6 +15,7 @@ public class EmployeeMatcherUser {
     pword = "";
     desired = null;
     email = "";
+    matches = new ArrayList<EmployeeMatcherUser>();
   }
 
   public EmployeeMatcherUser(String userName, String password,
@@ -24,6 +26,7 @@ public class EmployeeMatcherUser {
     System.out.println(desired);
     this.email = email;
     System.out.println(this.toString());
+    matches = new ArrayList<EmployeeMatcherUser>();
   }
   /*
   public void printUser() {
@@ -45,6 +48,18 @@ public class EmployeeMatcherUser {
 
   public String getEmail() {
     return this.email;
+  }
+
+  public int getType(){
+    return type;
+  }
+
+  public ArrayList<EmployeeMatcherUser> getUserMatches(){
+    return matches;
+  }
+
+  public void addMatch(EmployeeMatcherUser u){
+    matches.add(u);
   }
 
   public String toString() {

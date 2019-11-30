@@ -1,4 +1,4 @@
-package employeematcher;
+package employeeMatcher;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
@@ -22,8 +22,6 @@ public class MatcherSeeker extends EmployeeMatcherUser {
 
   private ArrayList<String> urls;
 
-  private ArrayList<MatcherEmployer> matches;
-
   // add ArrayList containing every seeker, and a boolean
   // indicating whether user liked (True) or disliked (False) them
   // determines whether users can message each other
@@ -38,7 +36,6 @@ public class MatcherSeeker extends EmployeeMatcherUser {
     images = new ArrayList<ImageIcon>();
     urls = new ArrayList<String>();
     type = 0;
-    matches = new ArrayList<MatcherEmployer>();
   }
 
   public MatcherSeeker(String name){
@@ -51,7 +48,6 @@ public class MatcherSeeker extends EmployeeMatcherUser {
     images = new ArrayList<ImageIcon>();
     urls = new ArrayList<String>();
     type = 0;
-
   }
 
   public MatcherSeeker(String firstName, String industry, String lastName,
@@ -132,14 +128,6 @@ public class MatcherSeeker extends EmployeeMatcherUser {
   public void setUrls(ArrayList<String> urls) {
     this.urls = urls;
   }
-
-//  public void addMatchS(MatcherEmployer e){
-//    matches.add(e);
-//  }
-
-//  public ArrayList<MatcherEmployer> getUserMatches(){
-//    return matches;
-//  }
 
   public String toString(){
     return firstName;
