@@ -21,6 +21,10 @@ public class EmployeeMatcherPanel extends JPanel {
   private JLabel accountDetail1;
   private JLabel accountDetail2;
   private JLabel accountDetail3;
+  private JLabel accountDetail4;
+  private JLabel accountDetail5;
+  private JLabel accountDetail6;
+  private JLabel accountDetail7;
 //  private JLabel
 //  private JLabel
 //  private JLabel
@@ -71,6 +75,14 @@ public class EmployeeMatcherPanel extends JPanel {
     buttonArea.add(extremeInterestButton);
     buttonArea.add(acceptButton);
 
+    accountArea.add(accountDetail1);
+    accountArea.add(accountDetail2);
+    accountArea.add(accountDetail3);
+    accountArea.add(accountDetail4);
+    accountArea.add(accountDetail5);
+    accountArea.add(accountDetail6);
+    accountArea.add(accountDetail7);
+
 
 
     slideNextImage.addMouseListener(theListener);
@@ -108,13 +120,22 @@ public class EmployeeMatcherPanel extends JPanel {
 //      System.out.println(e);
 //    }
 
-    //accountImages = currentUser.getImages;
+    accountImages = currentUser.getImages;
     this.displayAccountImages.setIcon(accountImages[imageTracker]);
 
   }
 
   public void slideLast(MouseEvent e){
     displayAccountImages.setIcon(accountImages[imageTracker-1]);
+    //need to add a conditional for employer/seeker
+    accountDetail1.setText(currentUser.getCompanyName());
+    accountDetail2.setText(currentUser.getLocation());
+    accountDetail3.setText(currentUser.getSize());
+    accountDetail4.setText(currentUser.getIndustry());
+    accountDetail5.setText(currentUser.getPosition());
+    accountDetail6.setText(currentUser.getJobDescription());
+    accountDetail7.setText(currentUser.getCompanyDescription()):
+
     displaySetup();
   }
 
@@ -168,6 +189,13 @@ public class EmployeeMatcherPanel extends JPanel {
 
   private void slideNext(MouseEvent e) {
     displayAccountImages.setIcon(accountImages[imageTracker+1]);
+      accountDetail1.setText(currentUser.getCompanyName());
+      accountDetail2.setText(currentUser.getLocation());
+      accountDetail3.setText(currentUser.getSize());
+      accountDetail4.setText(currentUser.getIndustry());
+      accountDetail5.setText(currentUser.getPosition());
+      accountDetail6.setText(currentUser.getJobDescription());
+      accountDetail7.setText(currentUser.getCompanyDescription()):
     displaySetup();
   }
 

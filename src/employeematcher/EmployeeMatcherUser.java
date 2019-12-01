@@ -1,4 +1,4 @@
-package employeeMatcher;
+package employeematcher;
 
 import java.util.ArrayList;
 
