@@ -1,5 +1,7 @@
-package employeematcher;
+package employeeMatcher;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class EmployeeMatcherUser {
@@ -8,6 +10,7 @@ public class EmployeeMatcherUser {
   private ArrayList<String> desired;
   private String email;
   private ArrayList<EmployeeMatcherUser> matches;
+  private ArrayList<ImageIcon> images;
   protected int type;
 
   public EmployeeMatcherUser() {
@@ -16,17 +19,18 @@ public class EmployeeMatcherUser {
     desired = null;
     email = "";
     matches = new ArrayList<EmployeeMatcherUser>();
+    images = new ArrayList<ImageIcon>();
   }
 
   public EmployeeMatcherUser(String userName, String password,
-                             ArrayList<String> interest, String email) {
+                             ArrayList<String> interest, String email, ArrayList<ImageIcon> images) {
     uname = userName;
     pword = password;
     this.desired = (ArrayList<String>) interest.clone();
     System.out.println(desired);
     this.email = email;
-    System.out.println(this.toString());
     matches = new ArrayList<EmployeeMatcherUser>();
+    this.images = images;
   }
   /*
   public void printUser() {
@@ -52,6 +56,14 @@ public class EmployeeMatcherUser {
 
   public int getType(){
     return type;
+  }
+
+  public ArrayList<ImageIcon> getImages() {
+    return images;
+  }
+
+  public void addImage(ImageIcon image) {
+    images.add(image);
   }
 
   public ArrayList<EmployeeMatcherUser> getUserMatches(){

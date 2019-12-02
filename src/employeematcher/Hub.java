@@ -1,5 +1,7 @@
 package employeeMatcher;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -32,6 +34,23 @@ public class Hub {
 
   public ArrayList getEmployers() {
     return employers;
+  }
+
+  public EmployeeMatcherUser setCurrentUser(String userName, String password){
+    for(MatcherEmployer e: employers){
+      if(e.getUName() == userName && e.getPWord() == password){
+        return e;
+      }
+    }
+
+    for(MatcherSeeker s: seekers){
+      if(s.getUName() == userName && s.getPWord() == password){
+        return s;
+      }
+    }
+
+    throw new IllegalArgumentException("User does not exist");
+
   }
 
   public void initializeMatrix() {
@@ -67,23 +86,6 @@ public class Hub {
     }
   }
 
-  // objects passed when either user likes the other
-  public void addLikeMatrixOlld(MatcherEmployer e, MatcherSeeker s) {
-    int seekerIndex = seekers.indexOf(s);
-    int employerIndex = employers.indexOf(e);
-    int newVal = matrix.get(seekerIndex).get(employerIndex) + 1;
-    matrix.get(seekerIndex).set(employerIndex, newVal);
-
-
-    System.out.println(newVal);
-    if(newVal == 2){
-      // FIXME adds each user to the other user's list of matches
-      //s.addMatchS(e);
-      //e.addMatchE(s);
-
-    }
-  }
-
   public void addLikeMatrix(EmployeeMatcherUser liker, EmployeeMatcherUser receiver) {
     int seekerIndex;
     int employerIndex;
@@ -111,7 +113,7 @@ public class Hub {
 
     // if newVal equals 12, users liked each other
     if(newVal == 12){
-      System.out.println("Match!!");
+      // adds each user to the other's list of matches
       liker.addMatch(receiver);
       receiver.addMatch(liker);
     }
@@ -125,6 +127,36 @@ public class Hub {
 //    }
   }
 
+  public void createSampleList(){
+    ArrayList<ImageIcon> e1Images = new ArrayList<ImageIcon>();
+    e1Images.add(new ImageIcon("Images/ao_logo.png"));
+    e1Images.add(new ImageIcon("Images/ao_office.jpg"));
+
+    ArrayList<ImageIcon> e2Images = new ArrayList<ImageIcon>();
+    e2Images.add(new ImageIcon("Images/gaa_logo.jpg"));
+    e2Images.add(new ImageIcon("Images/gaa_office.jpg"));
+
+    ArrayList<ImageIcon> s1Images = new ArrayList<ImageIcon>();
+    s1Images.add(new ImageIcon("Images/jd_profile.png"));
+    s1Images.add(new ImageIcon("Images/resumeTemplate.png"));
+    s1Images.add(new ImageIcon("Images/letterExample.png"));
+    s1Images.add(new ImageIcon("Images/commitHistory.png"));
+
+    MatcherEmployer e1 = new MatcherEmployer("Atomic Object", "Grand Rapids, MI",
+        "200", "Computer Software,", "Senior Software Developer", "Job",
+        "Company", e1Images);
+    MatcherEmployer e2 = new MatcherEmployer("Google","Ann Arbor, MI", "450",
+        "Information Services",
+        "Account Speicalist", "Marketing, Sales", "Google", e2Images);
+    MatcherSeeker s1 = new MatcherSeeker("John","Doe","Computer Software", "I am good at my job", "GVSU", "Internship: Bissel (2018)", s1Images, "linkedin.com");
+
+    addSeeker(s1);
+    addEmployer(e1);
+    addEmployer(e2);
+
+  }
+
+  // testing/visualization only
   public void printMatrix(){
     System.out.println("Seekers:");
     for(MatcherSeeker s: seekers){
@@ -194,28 +226,35 @@ public class Hub {
 
 
 
-    Hub hub1 = new Hub();
-    //ArrayList<EmployeeMatcherUser> list = new ArrayList<EmployeeMatcherUser>();
-    MatcherSeeker se1 = new MatcherSeeker("Seeker");
-    //list.add(se1);
-    MatcherEmployer em1 = new MatcherEmployer("Employer");
-    MatcherEmployer em2 = new MatcherEmployer("Google");
-    //list.add(em1);
-
-    hub1.printMatrix();
-    hub1.addSeeker(se1);
-    hub1.addEmployer(em1);
-    hub1.addEmployer(em2);
-    hub1.printMatrix();
-    hub1.addLikeMatrix(se1, em1);
-    hub1.printMatrix();
-    hub1.addLikeMatrix(em1, se1);
-    hub1.addLikeMatrix(em2, se1);
-    hub1.addLikeMatrix(se1, em2);
-    hub1.printMatrix();
-
-    System.out.println(se1.getUserMatches());
-
+//    Hub hub1 = new Hub();
+//    //ArrayList<EmployeeMatcherUser> list = new ArrayList<EmployeeMatcherUser>();
+//    MatcherSeeker se1 = new MatcherSeeker("Seeker");
+//    //list.add(se1);
+//    MatcherEmployer em1 = new MatcherEmployer("Employer");
+//    MatcherEmployer em2 = new MatcherEmployer("Google");
+//    //list.add(em1);
+//
+//    hub1.printMatrix();
+//    hub1.addSeeker(se1);
+//    hub1.addEmployer(em1);
+//    hub1.addEmployer(em2);
+//    hub1.printMatrix();
+//    hub1.addLikeMatrix(se1, em1);
+//    hub1.printMatrix();
+//    hub1.addLikeMatrix(em1, se1);
+//    hub1.addLikeMatrix(em2, se1);
+//    hub1.addLikeMatrix(se1, em2);
+//    hub1.printMatrix();
+//
+//    System.out.println(se1.getUserMatches());
+    Hub hub = new Hub();
+    System.out.println(hub.getSeekers());
+    //MatcherSeeker s1 = new MatcherSeeker("seeker");
+    hub.addSeeker(new MatcherSeeker("seeker"));
+    hub.printMatrix();
+    System.out.println(hub.getSeekers());
+    System.out.println(hub.getSeekers().get(1));
+    //MatcherSeeker currentUser = hub.getSeekers().get(0);
 
 
 

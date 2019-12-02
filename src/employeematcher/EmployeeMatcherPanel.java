@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -25,18 +26,25 @@ public class EmployeeMatcherPanel extends JPanel {
   private JLabel accountDetail5;
   private JLabel accountDetail6;
   private JLabel accountDetail7;
-//  private JLabel
-//  private JLabel
-//  private JLabel
-//  private JLabel
+
+
 
   private JLabel displayAccountImages;
   private JLabel emptyArea;
-  private String[] fileLocations = {"/Images/commitHistory.png","resumeTemplate.png","letterExample.png"};
-  private ImageIcon[] accountImages = new ImageIcon[fileLocations.length];
+  //private String[] fileLocations = {"/Images/commitHistory.png","resumeTemplate.png","letterExample.png"};
+  private ArrayList<ImageIcon> accountImages = new ArrayList<ImageIcon>();
   private int imageTracker = 0;
+  private int arrayIndex = 1;
 
+  // user currently using the platform
   private EmployeeMatcherUser currentUser;
+  private MatcherSeeker currentSeeker;
+  private MatcherEmployer currentEmployer;
+
+  private Hub hubInfo;
+
+  private ArrayList<MatcherSeeker> seekerList;
+  private ArrayList<MatcherEmployer> employerList;
 
 
   /**
@@ -47,7 +55,14 @@ public class EmployeeMatcherPanel extends JPanel {
     JPanel buttonArea = new JPanel();
     JPanel accountArea = new JPanel();
 
-    this.currentUser = new EmployeeMatcherUser();
+    hubInfo = new Hub();
+    hubInfo.createSampleList();
+    currentUser = (MatcherSeeker)hubInfo.getSeekers().get(1);
+
+    this.seekerList = hubInfo.getSeekers();
+    this.employerList = hubInfo.getEmployers();
+
+    this.accountImages = currentUser.getImages();
 
 
 
@@ -75,6 +90,22 @@ public class EmployeeMatcherPanel extends JPanel {
     buttonArea.add(extremeInterestButton);
     buttonArea.add(acceptButton);
 
+    this.accountDetail1 = new JLabel();
+    this.accountDetail2 = new JLabel();
+    this.accountDetail3 = new JLabel();
+    this.accountDetail4 = new JLabel();
+    this.accountDetail5 = new JLabel();
+    this.accountDetail6 = new JLabel();
+    this.accountDetail7 = new JLabel();
+
+    this.accountDetail1.setText("1");
+    this.accountDetail2.setText("2");
+    this.accountDetail3.setText("3");
+    this.accountDetail4.setText("4");
+    this.accountDetail5.setText("5");
+    this.accountDetail6.setText("6");
+    this.accountDetail7.setText("7");
+
     accountArea.add(accountDetail1);
     accountArea.add(accountDetail2);
     accountArea.add(accountDetail3);
@@ -83,15 +114,13 @@ public class EmployeeMatcherPanel extends JPanel {
     accountArea.add(accountDetail6);
     accountArea.add(accountDetail7);
 
-
-
     slideNextImage.addMouseListener(theListener);
     declineButton.addMouseListener(theListener);
     extremeInterestButton.addMouseListener(theListener);
     acceptButton.addMouseListener(theListener);
     slideLastImage.addMouseListener(theListener);
 
-    displayArea.add(displayAccountImages);
+    //displayArea.add(displayAccountImages);
 
 
 
@@ -120,21 +149,35 @@ public class EmployeeMatcherPanel extends JPanel {
 //      System.out.println(e);
 //    }
 
-    accountImages = currentUser.getImages;
-    this.displayAccountImages.setIcon(accountImages[imageTracker]);
+    //accountImages = currentUser.getImages();
+
+    //this.displayAccountImages.setIcon(accountImages.get(imageTracker));
 
   }
 
   public void slideLast(MouseEvent e){
-    displayAccountImages.setIcon(accountImages[imageTracker-1]);
+    displayAccountImages.setIcon(accountImages.get(imageTracker-1));
     //need to add a conditional for employer/seeker
-    accountDetail1.setText(currentUser.getCompanyName());
-    accountDetail2.setText(currentUser.getLocation());
-    accountDetail3.setText(currentUser.getSize());
-    accountDetail4.setText(currentUser.getIndustry());
-    accountDetail5.setText(currentUser.getPosition());
-    accountDetail6.setText(currentUser.getJobDescription());
-    accountDetail7.setText(currentUser.getCompanyDescription()):
+    // current user is a seeker
+    if(currentUser.getType() == 0){
+      // show seekers
+      accountDetail1.setText(seekerList.get(arrayIndex).getFullName());
+      accountDetail2.setText(seekerList.get(arrayIndex).getIndustry());
+      accountDetail3.setText(seekerList.get(arrayIndex).getPersonalStatement());
+      accountDetail4.setText(seekerList.get(arrayIndex).getEducation());
+      accountDetail5.setText(seekerList.get(arrayIndex).getExperience());
+      accountDetail6.setText(seekerList.get(arrayIndex).getUrls());
+    }
+    else{
+      // show employers
+      accountDetail1.setText(employerList.get(arrayIndex).getCompanyName());
+      accountDetail2.setText(employerList.get(arrayIndex).getLocation());
+      accountDetail3.setText(employerList.get(arrayIndex).getSize());
+      accountDetail4.setText(employerList.get(arrayIndex).getIndustry());
+      accountDetail5.setText(employerList.get(arrayIndex).getPosition());
+      accountDetail6.setText(employerList.get(arrayIndex).getJobDescription());
+      accountDetail7.setText(employerList.get(arrayIndex).getCompanyDescription());
+    }
 
     displaySetup();
   }
@@ -160,7 +203,7 @@ public class EmployeeMatcherPanel extends JPanel {
           slideLast(e);
         }
       } else if (e.getSource() == slideNextImage) {
-        if(!(imageTracker+1 > accountImages.length)) {
+        if(!(imageTracker+1 > accountImages.size())) {
           slideNext(e);
         }
 
@@ -188,14 +231,27 @@ public class EmployeeMatcherPanel extends JPanel {
   }
 
   private void slideNext(MouseEvent e) {
-    displayAccountImages.setIcon(accountImages[imageTracker+1]);
-      accountDetail1.setText(currentUser.getCompanyName());
-      accountDetail2.setText(currentUser.getLocation());
-      accountDetail3.setText(currentUser.getSize());
-      accountDetail4.setText(currentUser.getIndustry());
-      accountDetail5.setText(currentUser.getPosition());
-      accountDetail6.setText(currentUser.getJobDescription());
-      accountDetail7.setText(currentUser.getCompanyDescription()):
+    displayAccountImages.setIcon(accountImages.get(imageTracker+1));
+
+    if(currentUser.getType() == 0){
+      // show seekers
+      accountDetail1.setText(seekerList.get(arrayIndex).getFullName());
+      accountDetail2.setText(seekerList.get(arrayIndex).getIndustry());
+      accountDetail3.setText(seekerList.get(arrayIndex).getPersonalStatement());
+      accountDetail4.setText(seekerList.get(arrayIndex).getEducation());
+      accountDetail5.setText(seekerList.get(arrayIndex).getExperience());
+      accountDetail6.setText(seekerList.get(arrayIndex).getUrls());
+    }
+    else{
+      // show employers
+      accountDetail1.setText(employerList.get(arrayIndex).getCompanyName());
+      accountDetail2.setText(employerList.get(arrayIndex).getLocation());
+      accountDetail3.setText(employerList.get(arrayIndex).getSize());
+      accountDetail4.setText(employerList.get(arrayIndex).getIndustry());
+      accountDetail5.setText(employerList.get(arrayIndex).getPosition());
+      accountDetail6.setText(employerList.get(arrayIndex).getJobDescription());
+      accountDetail7.setText(employerList.get(arrayIndex).getCompanyDescription());
+    }
     displaySetup();
   }
 

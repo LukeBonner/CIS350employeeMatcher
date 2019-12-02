@@ -14,13 +14,11 @@ public class MatcherSeeker extends EmployeeMatcherUser {
 
   private String personalStatement;
 
-  private ArrayList<String> education;
+  private String education;
 
-  private ArrayList<String> experience;
+  private String experience;
 
-  private ArrayList<ImageIcon> images;
-
-  private ArrayList<String> urls;
+  private String urls;
 
   // add ArrayList containing every seeker, and a boolean
   // indicating whether user liked (True) or disliked (False) them
@@ -31,10 +29,9 @@ public class MatcherSeeker extends EmployeeMatcherUser {
     industry = "";
     lastName = "";
     personalStatement = "";
-    education = new ArrayList<String>();
-    experience = new ArrayList<String>();
-    images = new ArrayList<ImageIcon>();
-    urls = new ArrayList<String>();
+    education = "";
+    experience = "";
+    urls = "";
     type = 0;
   }
 
@@ -43,25 +40,27 @@ public class MatcherSeeker extends EmployeeMatcherUser {
     industry = "";
     lastName = "";
     personalStatement = "";
-    education = new ArrayList<String>();
-    experience = new ArrayList<String>();
-    images = new ArrayList<ImageIcon>();
-    urls = new ArrayList<String>();
+    education = "";
+    experience = "";
+    urls = "";
     type = 0;
   }
 
   public MatcherSeeker(String firstName, String industry, String lastName,
-                       String personalStatement, ArrayList<String> education,
-                       ArrayList<String> experience,
-                       ArrayList<ImageIcon> images, ArrayList<String> urls) {
+                       String personalStatement, String education,
+                       String experience, ArrayList<ImageIcon> images,
+                       String urls) {
     this.firstName = firstName;
     this.industry = industry;
     this.lastName = lastName;
     this.personalStatement = personalStatement;
     this.education = education;
     this.experience = experience;
-    this.images = images;
     this.urls = urls;
+  }
+
+  public String getFullName() {
+    return firstName + " " + lastName;
   }
 
   public String getFirstName() {
@@ -96,36 +95,27 @@ public class MatcherSeeker extends EmployeeMatcherUser {
     this.personalStatement = personalStatement;
   }
 
-  public ArrayList<String> getEducation() {
+  public String getEducation() {
     return education;
   }
 
-  public void setEducation(ArrayList<String> education) {
+  public void setEducation(String education) {
     this.education = education;
   }
 
-  public ArrayList<String> getExperience() {
+  public String getExperience() {
     return experience;
   }
 
-  public void setExperience(ArrayList<String> experience) {
+  public void setExperience(String experience) {
     this.experience = experience;
   }
 
-  // returns arraylist of seeker's images
-  public ArrayList<ImageIcon> getImages() {
-    return images;
-  }
-
-  public void addImage(ImageIcon image) {
-    images.add(image);
-  }
-
-  public ArrayList<String> getUrls() {
+  public String getUrls() {
     return urls;
   }
 
-  public void setUrls(ArrayList<String> urls) {
+  public void setUrls(String urls) {
     this.urls = urls;
   }
 

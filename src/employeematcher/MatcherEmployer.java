@@ -19,8 +19,6 @@ public class MatcherEmployer extends EmployeeMatcherUser {
 
   private String companyDescription;
 
-  private ArrayList<ImageIcon> images;
-
   // add ArrayList containing every seeker, and a boolean
   // indicating whether user liked (True) or disliked (False) them
   // determines whether users can message each other
@@ -33,7 +31,6 @@ public class MatcherEmployer extends EmployeeMatcherUser {
     position = "";
     jobDescription = "";
     companyDescription = "";
-    images = new ArrayList<ImageIcon>();
     type = 1;
   }
 
@@ -45,7 +42,6 @@ public class MatcherEmployer extends EmployeeMatcherUser {
     position = "";
     jobDescription = "";
     companyDescription = "";
-    images = new ArrayList<ImageIcon>();
     type = 1;
 
   }
@@ -61,7 +57,6 @@ public class MatcherEmployer extends EmployeeMatcherUser {
     this.position = position;
     this.jobDescription = jobDescription;
     this.companyDescription = companyDescription;
-    this.images = images;
   }
 
   public String getCompanyName() {
@@ -118,15 +113,6 @@ public class MatcherEmployer extends EmployeeMatcherUser {
 
   public void setCompanyDescription(String companyDescription) {
     this.companyDescription = companyDescription;
-  }
-
-  // returns arraylist of employer's images
-  public ArrayList<ImageIcon> getImages() {
-    return images;
-  }
-
-  public void addImage(ImageIcon image) {
-    images.add(image);
   }
 
   public void createProfile(){
