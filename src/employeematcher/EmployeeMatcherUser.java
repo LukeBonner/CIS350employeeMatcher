@@ -46,6 +46,14 @@ public class EmployeeMatcherUser {
     return this.pword;
   }
 
+  public void setUName(String uname) {
+    this.uname = uname;
+  }
+
+  public void setPWord(String pword){
+    this.pword = pword;
+  }
+
   public ArrayList<String> getDesired() {
     return this.desired;
   }
@@ -54,7 +62,7 @@ public class EmployeeMatcherUser {
     return this.email;
   }
 
-  public int getType(){
+  public int getType() {
     return type;
   }
 
@@ -66,11 +74,11 @@ public class EmployeeMatcherUser {
     images.add(image);
   }
 
-  public ArrayList<EmployeeMatcherUser> getUserMatches(){
+  public ArrayList<EmployeeMatcherUser> getUserMatches() {
     return matches;
   }
 
-  public void addMatch(EmployeeMatcherUser u){
+  public void addMatch(EmployeeMatcherUser u) {
     matches.add(u);
   }
 

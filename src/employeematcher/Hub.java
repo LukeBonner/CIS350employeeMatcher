@@ -36,6 +36,10 @@ public class Hub {
     return employers;
   }
 
+  public ArrayList<ArrayList<Integer>> getMatrix(){
+    return matrix;
+  }
+
   public EmployeeMatcherUser setCurrentUser(String userName, String password){
     for(MatcherEmployer e: employers){
       if(e.getUName() == userName && e.getPWord() == password){
@@ -56,6 +60,7 @@ public class Hub {
   public void initializeMatrix() {
     matrix.add(new ArrayList<Integer>());
     matrix.get(0).add(0);
+    printMatrix();
   }
 
   public void addSeeker(MatcherSeeker s) {
@@ -86,12 +91,18 @@ public class Hub {
     }
   }
 
+  public int getNumSeekers(){
+    return seekers.size();
+  }
+
+  public int getNumEmployers(){
+    return employers.size();
+  }
+
   public void addLikeMatrix(EmployeeMatcherUser liker, EmployeeMatcherUser receiver) {
     int seekerIndex;
     int employerIndex;
     int newVal = 0;
-    System.out.println("Liker Type: " + liker.getType());
-    System.out.println("Receiver Type: " + receiver.getType());
     if(liker.getType() == receiver.getType()){
       throw new IllegalArgumentException("Cannot like user of the same type.");
     }
@@ -116,6 +127,7 @@ public class Hub {
       // adds each user to the other's list of matches
       liker.addMatch(receiver);
       receiver.addMatch(liker);
+      System.out.println(liker + " and " + receiver + " matched!!");
     }
 
 //    System.out.println(newVal);
@@ -125,6 +137,28 @@ public class Hub {
 //      //e.addMatchE(s);
 //
 //    }
+  }
+
+  public boolean usersMatched(EmployeeMatcherUser u1, EmployeeMatcherUser u2){
+    int seekerIndex, employerIndex;
+    if (u1.getType() == 0) {
+      seekerIndex = seekers.indexOf(u1);
+      employerIndex = employers.indexOf(u2);
+
+      if(matrix.get(seekerIndex).get(employerIndex) == 12){
+        return true;
+      }
+      return false;
+    }
+    else{
+      seekerIndex = seekers.indexOf(u2);
+      employerIndex = employers.indexOf(u1);
+
+      if(matrix.get(seekerIndex).get(employerIndex) == 12){
+        return true;
+      }
+      return false;
+    }
   }
 
   public void createSampleList(){
@@ -148,30 +182,36 @@ public class Hub {
     MatcherEmployer e2 = new MatcherEmployer("Google","Ann Arbor, MI", "450",
         "Information Services",
         "Account Speicalist", "Marketing, Sales", "Google", e2Images);
+    MatcherEmployer e3 = new MatcherEmployer("My company", "Allendale, MI", "1", "Making money", "CEO", "Do cool stuff", "Enterprise", e1Images);
     MatcherSeeker s1 = new MatcherSeeker("John","Doe","Computer Software", "I am good at my job", "GVSU", "Internship: Bissel (2018)", s1Images, "linkedin.com");
 
     addSeeker(s1);
     addEmployer(e1);
     addEmployer(e2);
+    addEmployer(e3);
+
+
+    addLikeMatrix(e2,s1);
+    //addLikeMatrix(s1,e2);
 
   }
 
   // testing/visualization only
   public void printMatrix(){
-    System.out.println("Seekers:");
+    //System.out.println("Seekers:");
     for(MatcherSeeker s: seekers){
       System.out.println(s.getFirstName());
     }
     System.out.println();
 
-    System.out.println("Employers:");
+    //System.out.println("Employers:");
     for(MatcherEmployer e: employers){
       System.out.println(e.getCompanyName());
     }
     System.out.println();
 
-    System.out.println("Number of Employers/Columns:  " + matrix.get(0).size());
-    System.out.println("Number of Seekers/Rows:  " + matrix.size());
+//    System.out.println("Number of Employers/Columns:  " + matrix.get(0).size());
+//    System.out.println("Number of Seekers/Rows:  " + matrix.size());
 
     for (int i = 0; i < matrix.size(); ++i) {
       for (int j = 0; j < matrix.get(0).size(); ++j) {
@@ -181,83 +221,4 @@ public class Hub {
     }
   }
 
-
-   //driver for the program, for testing purposes
-  public static void main(String[] args){
-//    Hub hub = new Hub();
-//
-//    MatcherSeeker s1 = new MatcherSeeker("Seeker 1");
-//    MatcherSeeker s2 = new MatcherSeeker("Seeker 2");
-//    MatcherEmployer e1 = new MatcherEmployer("Employer 1");
-//    MatcherEmployer e2 = new MatcherEmployer("Employer 2");
-//    MatcherEmployer e3 = new MatcherEmployer("Employer 3");
-//
-//    hub.addSeeker(s1);
-//    hub.addSeeker(s2);
-//    hub.addEmployer(e1);
-//    hub.addEmployer(e2);
-//    hub.addEmployer(e3);
-//
-//    hub.printMatrix();
-//
-//    hub.addLikeMatrix(s1,e1);
-//    hub.printMatrix();
-//    hub.addLikeMatrix(s1,e2);
-//    hub.printMatrix();
-//    hub.addLikeMatrix(e1,s1);
-//    hub.printMatrix();
-//
-//    hub.addSeeker(new MatcherSeeker("Seeker 3"));
-//    hub.addSeeker(new MatcherSeeker("Seeker 4"));
-//    hub.addSeeker(new MatcherSeeker("Seeker 5"));
-//    hub.addEmployer(new MatcherEmployer("Employer 4"));
-//    hub.addEmployer(new MatcherEmployer("Employer 5"));
-//    hub.addEmployer(new MatcherEmployer("Employer 6"));
-//
-//    hub.printMatrix();
-//
-//    System.out.println();
-//
-////    hub.addLikeMatrix(e3,s2);
-////    System.out.println("E3's matches: " + e3.getUserMatches());
-////    hub.addLikeMatrix(e3,s2);
-////    System.out.println("E3's matches: " + e3.getUserMatches().get(0));
-
-
-
-
-//    Hub hub1 = new Hub();
-//    //ArrayList<EmployeeMatcherUser> list = new ArrayList<EmployeeMatcherUser>();
-//    MatcherSeeker se1 = new MatcherSeeker("Seeker");
-//    //list.add(se1);
-//    MatcherEmployer em1 = new MatcherEmployer("Employer");
-//    MatcherEmployer em2 = new MatcherEmployer("Google");
-//    //list.add(em1);
-//
-//    hub1.printMatrix();
-//    hub1.addSeeker(se1);
-//    hub1.addEmployer(em1);
-//    hub1.addEmployer(em2);
-//    hub1.printMatrix();
-//    hub1.addLikeMatrix(se1, em1);
-//    hub1.printMatrix();
-//    hub1.addLikeMatrix(em1, se1);
-//    hub1.addLikeMatrix(em2, se1);
-//    hub1.addLikeMatrix(se1, em2);
-//    hub1.printMatrix();
-//
-//    System.out.println(se1.getUserMatches());
-    Hub hub = new Hub();
-    System.out.println(hub.getSeekers());
-    //MatcherSeeker s1 = new MatcherSeeker("seeker");
-    hub.addSeeker(new MatcherSeeker("seeker"));
-    hub.printMatrix();
-    System.out.println(hub.getSeekers());
-    System.out.println(hub.getSeekers().get(1));
-    //MatcherSeeker currentUser = hub.getSeekers().get(0);
-
-
-
-
-  }
 }

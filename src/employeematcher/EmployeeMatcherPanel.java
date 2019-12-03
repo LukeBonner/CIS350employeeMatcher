@@ -28,10 +28,9 @@ public class EmployeeMatcherPanel extends JPanel {
   private JLabel accountDetail7;
 
 
-
   private JLabel displayAccountImages;
   private JLabel emptyArea;
-  //private String[] fileLocations = {"/Images/commitHistory.png","resumeTemplate.png","letterExample.png"};
+  //private String[] fil eLocations = {"/Images/commitHistory.png","resumeTemplate.png","letterExample.png"};
   private ArrayList<ImageIcon> accountImages = new ArrayList<ImageIcon>();
   private int imageTracker = 0;
   private int arrayIndex = 1;
@@ -57,30 +56,27 @@ public class EmployeeMatcherPanel extends JPanel {
 
     hubInfo = new Hub();
     hubInfo.createSampleList();
-    currentUser = (MatcherSeeker)hubInfo.getSeekers().get(1);
+    currentUser = (MatcherSeeker) hubInfo.getSeekers().get(1);
 
     this.seekerList = hubInfo.getSeekers();
     this.employerList = hubInfo.getEmployers();
 
     this.accountImages = currentUser.getImages();
 
-
-
     ButtonListener theListener = new ButtonListener();
 
-
-    this.acceptButton = new JButton("interested");
-    this.declineButton = new JButton("not interested");
-    this.extremeInterestButton = new JButton("very interested");
+    this.acceptButton = new JButton("Interested");
+    this.declineButton = new JButton("Not Interested");
+    this.extremeInterestButton = new JButton("Very Interested");
     this.slideLastImage = new JButton("<--");
     this.slideNextImage = new JButton("-->");
     this.emptyArea = new JLabel();
     this.displayAccountImages = new JLabel();
 
-    displayArea.setPreferredSize(new Dimension(200,200));
-    buttonArea.setLayout(new GridLayout(2,3));
-    displayArea.setLayout(new GridLayout(1,1));
-    accountArea.setLayout(new GridLayout(4,2));
+    displayArea.setPreferredSize(new Dimension(200, 200));
+    buttonArea.setLayout(new GridLayout(2, 3));
+    displayArea.setLayout(new GridLayout(1, 1));
+    accountArea.setLayout(new GridLayout(4, 2));
 
 
     buttonArea.add(slideLastImage);
@@ -98,13 +94,9 @@ public class EmployeeMatcherPanel extends JPanel {
     this.accountDetail6 = new JLabel();
     this.accountDetail7 = new JLabel();
 
-    this.accountDetail1.setText("1");
-    this.accountDetail2.setText("2");
-    this.accountDetail3.setText("3");
-    this.accountDetail4.setText("4");
-    this.accountDetail5.setText("5");
-    this.accountDetail6.setText("6");
-    this.accountDetail7.setText("7");
+    System.out.println(this.currentUser.getType());
+
+    displayCurrentUser();
 
     accountArea.add(accountDetail1);
     accountArea.add(accountDetail2);
@@ -120,13 +112,11 @@ public class EmployeeMatcherPanel extends JPanel {
     acceptButton.addMouseListener(theListener);
     slideLastImage.addMouseListener(theListener);
 
-    //displayArea.add(displayAccountImages);
-
-
-
+    displayArea.add(displayAccountImages);
 
 
     this.add(displayArea, BorderLayout.NORTH);
+    this.add(accountArea, BorderLayout.CENTER);
     this.add(buttonArea, BorderLayout.SOUTH);
 
     displaySetup();
@@ -134,7 +124,7 @@ public class EmployeeMatcherPanel extends JPanel {
   }
 
 
-  public void displaySetup(){
+  public void displaySetup() {
     URL url = null;
 
 
@@ -155,11 +145,9 @@ public class EmployeeMatcherPanel extends JPanel {
 
   }
 
-  public void slideLast(MouseEvent e){
-    displayAccountImages.setIcon(accountImages.get(imageTracker-1));
-    //need to add a conditional for employer/seeker
+  public void displayCurrentUser() {
     // current user is a seeker
-    if(currentUser.getType() == 0){
+    if (currentUser.getType() == 1) {
       // show seekers
       accountDetail1.setText(seekerList.get(arrayIndex).getFullName());
       accountDetail2.setText(seekerList.get(arrayIndex).getIndustry());
@@ -167,8 +155,7 @@ public class EmployeeMatcherPanel extends JPanel {
       accountDetail4.setText(seekerList.get(arrayIndex).getEducation());
       accountDetail5.setText(seekerList.get(arrayIndex).getExperience());
       accountDetail6.setText(seekerList.get(arrayIndex).getUrls());
-    }
-    else{
+    } else {
       // show employers
       accountDetail1.setText(employerList.get(arrayIndex).getCompanyName());
       accountDetail2.setText(employerList.get(arrayIndex).getLocation());
@@ -178,8 +165,44 @@ public class EmployeeMatcherPanel extends JPanel {
       accountDetail6.setText(employerList.get(arrayIndex).getJobDescription());
       accountDetail7.setText(employerList.get(arrayIndex).getCompanyDescription());
     }
+  }
 
-    displaySetup();
+  public EmployeeMatcherUser getCurrentUser() {
+    return currentUser;
+  }
+
+  public void advanceList() {
+
+    if (currentUser.getType() == 0) {
+      if (arrayIndex < hubInfo.getNumEmployers() - 1) {
+        arrayIndex++;
+        if (hubInfo.usersMatched(currentUser, employerList.get(arrayIndex))) {
+          advanceList();
+        }
+        displayCurrentUser();
+      }
+    } else {
+      if (arrayIndex < hubInfo.getNumSeekers()) {
+        arrayIndex++;
+        if (hubInfo.usersMatched(currentUser, seekerList.get(arrayIndex))) {
+          advanceList();
+        }
+        displayCurrentUser();
+      }
+    }
+  }
+
+  public void slideLast(MouseEvent e) {
+    System.out.println("Back button");
+    if (imageTracker - 1 > 0) {
+      displayAccountImages.setIcon(accountImages.get(imageTracker - 1));
+      //need to add a conditional for employer/seeker
+
+
+      displaySetup();
+    } else {
+      System.out.println("At beginning of list, can't go back further");
+    }
   }
 
 
@@ -199,22 +222,28 @@ public class EmployeeMatcherPanel extends JPanel {
     @Override
     public void mouseReleased(MouseEvent e) {
       if (e.getSource() == slideLastImage) {
-        if(imageTracker-1>0){
+        System.out.println("Previous image");
+        if (imageTracker - 1 > 0) {
           slideLast(e);
         }
       } else if (e.getSource() == slideNextImage) {
-        if(!(imageTracker+1 > accountImages.size())) {
+        System.out.println("Next Image");
+        if (!(imageTracker + 1 > accountImages.size())) {
           slideNext(e);
         }
 
       } else if (e.getSource() == declineButton) {
-        System.out.println("Clicked Decline");
-        //currentUser.
+        advanceList();
       } else if (e.getSource() == extremeInterestButton) {
         System.out.println("Clicked Extreme Interest");
+        advanceList();
         //currentUser.
       } else if (e.getSource() == acceptButton) {
         System.out.println("Clicked Accept");
+        System.out.println(currentUser.getType());
+        hubInfo.addLikeMatrix(currentUser, employerList.get(arrayIndex));
+        advanceList();
+
         //currentUser.
       }
     }
@@ -231,9 +260,9 @@ public class EmployeeMatcherPanel extends JPanel {
   }
 
   private void slideNext(MouseEvent e) {
-    displayAccountImages.setIcon(accountImages.get(imageTracker+1));
+    //displayAccountImages.setIcon(accountImages.get(imageTracker+1));
 
-    if(currentUser.getType() == 0){
+    if (currentUser.getType() == 1) {
       // show seekers
       accountDetail1.setText(seekerList.get(arrayIndex).getFullName());
       accountDetail2.setText(seekerList.get(arrayIndex).getIndustry());
@@ -241,8 +270,7 @@ public class EmployeeMatcherPanel extends JPanel {
       accountDetail4.setText(seekerList.get(arrayIndex).getEducation());
       accountDetail5.setText(seekerList.get(arrayIndex).getExperience());
       accountDetail6.setText(seekerList.get(arrayIndex).getUrls());
-    }
-    else{
+    } else {
       // show employers
       accountDetail1.setText(employerList.get(arrayIndex).getCompanyName());
       accountDetail2.setText(employerList.get(arrayIndex).getLocation());
