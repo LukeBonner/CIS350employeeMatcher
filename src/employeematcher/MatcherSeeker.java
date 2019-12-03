@@ -35,17 +35,6 @@ public class MatcherSeeker extends EmployeeMatcherUser {
     type = 0;
   }
 
-  public MatcherSeeker(String name){
-    firstName = name;
-    industry = "";
-    lastName = "";
-    personalStatement = "";
-    education = "";
-    experience = "";
-    urls = "";
-    type = 0;
-  }
-
   public MatcherSeeker(String firstName, String industry, String lastName,
                        String personalStatement, String education,
                        String experience, ArrayList<ImageIcon> images,
@@ -119,7 +108,7 @@ public class MatcherSeeker extends EmployeeMatcherUser {
     this.urls = urls;
   }
 
-  public String toString(){
+  public String toString() {
     return firstName;
   }
 

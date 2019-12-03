@@ -34,18 +34,6 @@ public class MatcherEmployer extends EmployeeMatcherUser {
     type = 1;
   }
 
-  public MatcherEmployer(String name){
-    companyName = name;
-    location = "";
-    size = "";
-    industry = "";
-    position = "";
-    jobDescription = "";
-    companyDescription = "";
-    type = 1;
-
-  }
-
   public MatcherEmployer(String companyName, String location,
                          String size, String industry, String position,
                          String jobDescription, String companyDescription,
@@ -57,6 +45,7 @@ public class MatcherEmployer extends EmployeeMatcherUser {
     this.position = position;
     this.jobDescription = jobDescription;
     this.companyDescription = companyDescription;
+    this.type = 1;
   }
 
   public String getCompanyName() {
@@ -115,15 +104,7 @@ public class MatcherEmployer extends EmployeeMatcherUser {
     this.companyDescription = companyDescription;
   }
 
-  public void createProfile(){
-    // initial creation of the node
-  }
-
-  public void updateProfile(){
-
-  }
-
-  public String toString(){
+  public String toString() {
     return companyName;
   }
 
