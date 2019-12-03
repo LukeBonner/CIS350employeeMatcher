@@ -10,6 +10,8 @@ public class EmployeeMatcherUI extends JFrame {
 
   public EmployeeMatcherUI(String title) {
     super(title);
+
+    int user = JOptionPane.showInputdialog()
     JTabbedPane tabs = new JTabbedPane();
     EmployeeMatcherPanel matcherPanel = new EmployeeMatcherPanel();
     matcherAccountPanel accountPanel = new matcherAccountPanel();
