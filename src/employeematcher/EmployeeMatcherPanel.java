@@ -26,6 +26,7 @@ public class EmployeeMatcherPanel extends JPanel {
   private JLabel accountDetail5;
   private JLabel accountDetail6;
   private JLabel accountDetail7;
+  private JLabel emptyAccountDetail;
 
 
   private JLabel displayAccountImages;
@@ -50,6 +51,7 @@ public class EmployeeMatcherPanel extends JPanel {
    *
    */
   public EmployeeMatcherPanel() {
+    this.setLayout(new GridLayout(3,1));
     JPanel displayArea = new JPanel();
     JPanel buttonArea = new JPanel();
     JPanel accountArea = new JPanel();
@@ -74,9 +76,10 @@ public class EmployeeMatcherPanel extends JPanel {
     this.displayAccountImages = new JLabel();
 
     displayArea.setPreferredSize(new Dimension(200, 200));
+
     buttonArea.setLayout(new GridLayout(2, 3));
     displayArea.setLayout(new GridLayout(1, 1));
-    accountArea.setLayout(new GridLayout(4, 2));
+    accountArea.setLayout(new GridLayout(2, 4));
 
 
     buttonArea.add(slideLastImage);
@@ -93,6 +96,7 @@ public class EmployeeMatcherPanel extends JPanel {
     this.accountDetail5 = new JLabel();
     this.accountDetail6 = new JLabel();
     this.accountDetail7 = new JLabel();
+    this.emptyAccountDetail = new JLabel();
 
     System.out.println(this.currentUser.getType());
 
@@ -105,6 +109,7 @@ public class EmployeeMatcherPanel extends JPanel {
     accountArea.add(accountDetail5);
     accountArea.add(accountDetail6);
     accountArea.add(accountDetail7);
+    accountArea.add(emptyAccountDetail);
 
     slideNextImage.addMouseListener(theListener);
     declineButton.addMouseListener(theListener);
@@ -115,9 +120,9 @@ public class EmployeeMatcherPanel extends JPanel {
     displayArea.add(displayAccountImages);
 
 
-    this.add(displayArea, BorderLayout.NORTH);
-    this.add(accountArea, BorderLayout.CENTER);
-    this.add(buttonArea, BorderLayout.SOUTH);
+    this.add(displayArea);
+    this.add(accountArea);
+    this.add(buttonArea);
 
     displaySetup();
 
