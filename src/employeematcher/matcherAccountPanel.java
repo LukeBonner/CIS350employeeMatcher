@@ -17,14 +17,16 @@ public class matcherAccountPanel extends JPanel {
 
 
   public matcherAccountPanel() {
-    this.accountDetails = new JLabel();
-
-    EmployeeMatcherPanel p = new EmployeeMatcherPanel();
-    currentUser = p.getCurrentUser();
+    this.accountdetails = new JPanel();
+    accountdetails.setLayout(new GridLayout(7,1));
 
 
-    JPanel accountPanel = new JPanel();
-    accountPanel.setLayout(new GridLayout(2, 1));
+    this.accountInfoPanel = new accountInfoPanel();
+    accountInfoPanel.setLayout(new GridLayout(5,1));
+
+
+
+
 
     this.accountDetail1 = new JLabel();
     this.accountDetail2 = new JLabel();
@@ -33,6 +35,12 @@ public class matcherAccountPanel extends JPanel {
     this.accountDetail5 = new JLabel();
     this.accountDetail6 = new JLabel();
     this.accountDetail7 = new JLabel();
+
+    this.accountDetails = new JLabel();
+
+    EmployeeMatcherPanel p = new EmployeeMatcherPanel();
+    currentUser = p.getCurrentUser();
+
 
     if (currentUser.getType() == 0) {
       MatcherSeeker s = (MatcherSeeker) currentUser;
@@ -56,28 +64,11 @@ public class matcherAccountPanel extends JPanel {
       accountDetail7.setText(e.getCompanyDescription());
     }
 
-    accountPanel.add(accountDetail1);
-    accountPanel.add(accountDetail2);
-    accountPanel.add(accountDetail3);
-    accountPanel.add(accountDetail4);
-    accountPanel.add(accountDetail5);
-    accountPanel.add(accountDetail6);
-    accountPanel.add(accountDetail7);
+
+    this.add(accountDetails, BorderLayout.NORTH);
+    this.add(accountInfoPanel, BorderLayout.SOUTH);
 
 
-    this.accountDetails = new JLabel();
-    this.accountInfoPanel = new JPanel();
-
-
-    accountDetails.setLayout(new GridLayout(2, 1));
-
-
-    accountPanel.setLayout(new GridLayout(2, 1));
-    accountPanel.add(accountDetails);
-    accountInfoPanel.add(accountPanel);
-
-
-    this.add(accountInfoPanel, BorderLayout.CENTER);
 
 
   }
