@@ -1,4 +1,0 @@
-John Smith, 10isbestDW, testAddress1, Computer Science,  Data Science|
-danno3321, testpassword23, testAddress2, History|
-Nicolai99, dpk01, testAddress3, Natural Sciences|
-danno3321, testpassword1, testAddress4, THIS SHOULD HAVE FAILED!|
